@@ -6,7 +6,7 @@ class MatrixGraph1:
     def add_edge(self, start_index, end_index):
         """Add an edge from start vertex to end vertex."""
         self.matrix[start_index][end_index] = 1
-
+    
 
 """Live coding of different ways to represent graphs."""
 

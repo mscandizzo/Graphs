@@ -9,13 +9,15 @@ class RandomGraph:
         self.nodos = list()
         self.edge_list = list()
         
+        
 class GraphCreation(RandomGraph):
     def __init__(self,nodes):
         self.nodes = nodes
         super().__init__()
+        #self.adjacency_matrix()
            
     def generate_edges(self):
-        self.nodos = sample(self.letters,self.nodes)
+        self.nodos = sorted(sample(self.letters,self.nodes))
         
         for key in self.nodos:
             noditos = self.nodos.copy()
@@ -27,18 +29,17 @@ class GraphCreation(RandomGraph):
     def adjacency_matrix(self):
         graph = self.generate_edges()
 
-        matrix_elements = sorted(graph.keys())
-        cols = rows = len(matrix_elements)
+        cols = rows = len(self.nodos)
 
-        adjacency_matrix = [[0 for _ in range(rows)] for _ in range(cols)]
+        self.adjacency_matrix = [[0 for _ in range(rows)] for _ in range(cols)]
 
-        for key in matrix_elements:
-            for neighbor in graph[key]:
+        for key in self.nodos:
+            for neighbor in self.adjacent_list[key]:
                 self.edge_list.append((key,neighbor))
         
         for edge in self.edge_list:
-            index_of_first_vertex = matrix_elements.index(edge[0])
-            index_of_second_vertex = matrix_elements.index(edge[1])
-            adjacency_matrix[index_of_first_vertex][index_of_second_vertex] = 1
+            index_of_first_vertex = self.nodos.index(edge[0])
+            index_of_second_vertex = self.nodos.index(edge[1])
+            self.adjacency_matrix[index_of_first_vertex][index_of_second_vertex] = 1
 
-        return matrix_elements, self.edge_list, adjacency_matrix
+        return self.edge_list, self.adjacency_matrix
